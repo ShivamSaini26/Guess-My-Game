@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guess My Number Created By SHIVAM_SAINI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Goldman:wght@700&display=swap" rel="stylesheet" />
+
+    <style>
+        body {
+            font-family: "Goldman", cursive;
+        }
+
+        .container {
+            background-color: #5ee4e4;
+            border: 2px solid #ff0000;
+            margin: 0px auto;
+            width: 98%;
+        }
+
+        .upper p {
+            text-align: right;
+            font-size: 2rem;
+        }
+
+        .upper .again {
+            font-size: 2rem;
+            padding: 10px;
+            margin: 2rem;
+            background-color: #dc143c;
+            color: #ffffff;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .again:hover {
+            background-color: rgb(35, 143, 62);
+            transform: rotate(360deg);
+            transform: scale(0.7);
+            transition-duration: 0.5s;
+            transition-timing-function: ease-out;
+        }
+
+        .middle {
+            text-align: center;
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .middle h1 {
+            margin-bottom: 0;
+        }
+
+        .middle p {
+            margin: 0;
+            font-size: 7rem;
+        }
+
+        .lower {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        #userNumber {
+            display: block;
+            background-color: rgb(245, 247, 136);
+            font-size: 2.5rem;
+            width: 50%;
+            padding: 5px;
+            border-radius: 10px;
+            margin: 6px auto;
+            text-align: center;
+        }
+
+        #check {
+            font-size: 2rem;
+            padding: 10px;
+            display: block;
+            margin: 15px auto;
+            background-color: #dc143c;
+            color: #ffffff;
+            border-radius: 10px;
+            cursor: pointer;
+            animation-name: shiv;
+            animation-duration: 0.5s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes shiv {
+            0% {
+                background-color: #e04211;
+            }
+
+            100% {
+                background-color: #101410;
+            }
+        }
+
+        #check:hover {
+            background-color: rgb(182, 27, 58);
+        }
+
+        .message {
+            font-size: 2rem;
+            width: 40%;
+        }
+
+        .User {
+            width: 50%;
+            align-self: center;
+        }
+
+        /* making game responsive */
+
+        @media screen and (max-width: 650px) {
+            .upper p {
+                font-size: 20px;
+                margin-right: 20px;
+            }
+
+            .middle h1 {
+                font-size: 2rem;
+            }
+
+            .middle .queMark {
+                font-size: 3rem;
+            }
+
+            .upper .again {
+                font-size: 1rem;
+                padding: 5px;
+                margin: 2rem auto;
+                border-radius: 5px;
+                display: block;
+            }
+
+            #userNumber {
+                font-size: 2rem;
+                padding: 5px;
+                width: 65%;
+            }
+
+            #check {
+                font-size: 1rem;
+            }
+
+            .displayMessage {
+                font-size: 20px;
+            }
+
+            .remain2 {
+                font-size: 20px;
+            }
+        }
+
+        @media screen and (max-width: 270px) {
+            .upper p {
+                font-size: 18px;
+                margin-right: 2px;
+                text-align: center;
+            }
+
+            .middle h1 {
+                font-size: 20px;
+            }
+
+            .middle .queMark {
+                font-size: 20px;
+            }
+
+            .upper .again {
+                font-size: 10px;
+                padding: 5px;
+                margin: 2rem auto;
+                border-radius: 5px;
+                display: block;
+            }
+
+            #userNumber {
+                font-size: 10px;
+                padding: 5px;
+                width: 65%;
+            }
+
+            #check {
+                font-size: 10px;
+            }
+
+            .displayMessage {
+                font-size: 15px;
+            }
+
+            .remain2 {
+                font-size: 15px;
+            }
+
+            .lower {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .lower .message {
+                align-self: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="upper">
+            <button class="again">Play Again</button>
+            <p>Input any Number (1-20)</p>
+        </div>
+        <div class="middle">
+            <h1>Guess My Number !</h1>
+            <p class="queMark">?</p>
+        </div>
+        <div class="lower">
+            <div class="User">
+                <input type="number" name="" id="userNumber" />
+                <button id="check">Check</button>
+            </div>
+            <div class="message">
+                <p class="displayMessage">Starting Game...</p>
+                <span class="remain2">Remain :
+                    <span class="remain">20 </span>
+                </span>
+                <p class="remain2">
+                    HighScore :
+                    <span class="highscore">0 </span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let highscoreMain = 0;
+        let count1 = 20;
+        //random number;
+        let RandomNumber = Math.trunc(Math.random() * 20) + 1;
+        //console.log(RandomNumber);
+
+        //tageting Q-mark sign
+        // document.querySelector('.queMark').textContent = RandomNumber;
+
+        //adding event listener;
+        document.querySelector("#check").addEventListener("click", function () {
+            //tageting the input field;
+            userInput = document.querySelector("#userNumber").value;
+            //console.log( userInput);
+
+            //when Userinput is equal to 0;
+            if (userInput === "0") {
+                                //instead  of this code I used displaymessageFunction below;
+
+                // document.querySelector(".displayMessage").textContent =
+                //     "Invalid Number 0";
+displayMessageFunction("Invalid Number 0");
+                document.querySelector(".displayMessage").style.color = "white";
+            }
+
+            //when userInput is greater than 21;
+            else if (userInput > 20) {
+                                                //instead  of this code I used displaymessageFunction below;
+
+                // document.querySelector(".displayMessage").textContent =
+                //     "Input between 1-20";
+displayMessageFunction( "Input between 1-20");
+                document.querySelector(".displayMessage").style.color = "white";
+            }
+
+            //when userinput is greater than random value;
+            else if (userInput > RandomNumber) {
+                //instead  of this code I used displaymessageFunction below;
+
+                // document.querySelector(".displayMessage").textContent = "Too Big !";
+                displayMessageFunction("Too Big !");
+                //setting upscore
+                let count1 = Number(document.querySelector(".remain").textContent);
+
+                count1--;
+                document.querySelector(".remain").textContent = count1;
+            }
+            //when userinput is less than random value;
+            else if (userInput < RandomNumber) {
+                                //instead  of this code I used displaymessageFunction below;
+
+                // document.querySelector(".displayMessage").textContent = "Too Small !";
+                displayMessageFunction("Too Small !");
+                // //setting upscore
+                let count1 = Number(document.querySelector(".remain").textContent);
+
+                count1--;
+                document.querySelector(".remain").textContent = count1;
+            }
+            //when userinput is equal to random number;
+            else if (userInput == RandomNumber) {
+                document.querySelector(".queMark").textContent = RandomNumber;
+
+                //instead  of this code I used displaymessageFunction below;
+                // document.querySelector(".displayMessage").textContent =
+                //     "HOOORAYY ! You win dude.";
+
+                displayMessageFunction("HOOORAYY ! You win dude.")
+                document.querySelector(".displayMessage").style.color = "red";
+                document.querySelector(".container").style.backgroundColor = "yellow";
+
+                //highscore
+                let count1 = Number(document.querySelector(".remain").textContent);
+
+                highscore = count1;
+                if (count1 > highscoreMain) {
+                    highscoreMain = count1;
+                    // console.log(highscoreMain);
+                    document.querySelector(".highscore").textContent = highscoreMain;
+                }
+            }
+        });
+        //restoring all for play again button
+        document.querySelector(".again").addEventListener("click", function () {
+            RandomNumber = Math.trunc(Math.random() * 20) + 1;
+            //console.log(RandomNumber);
+            document.querySelector(".container").style.backgroundColor = "#5ee4e4";
+
+            //instead  of this code I used displaymessageFunction below;
+            // document.querySelector(".displayMessage").textContent =
+            //     "Starting Game...";
+
+            displayMessageFunction("Starting Game...");
+            document.querySelector(".displayMessage").style.color = "black";
+            document.querySelector("#userNumber").value = "";
+            document.querySelector(".remain").textContent = "20";
+            document.querySelector(".queMark").textContent = "?";
+        });
+        //function for display message
+        let displayMessageFunction = function (message) {
+            document.querySelector(".displayMessage").textContent =
+                `${message}`;
+        }
+    </script>
+</body>
+//shivamsaini
+
+
+</html>
